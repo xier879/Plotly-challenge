@@ -31,7 +31,9 @@ function init() {
   var selector = d3.select("#selDataset");
 
   // Use the list of sample names to populate the select options
-  d3.json("/names").then((sampleNames) => {
+  d3.json("samples.json").then((data) => {
+    var sampleNames = data.names;
+
     sampleNames.forEach((sample) => {
       selector
         .append("option")
@@ -40,7 +42,7 @@ function init() {
     });
 
     // Use the first sample from the list to build the initial plots
-    const firstSample = sampleNames[0];
+    var firstSample = sampleNames[0];
     buildCharts(firstSample);
     buildMetadata(firstSample);
   });
